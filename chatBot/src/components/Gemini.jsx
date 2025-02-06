@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Gemini.css"; 
 
 const Gemini = () => {
-  const [setResponse] = useState("");
+  // const [setResponse] = useState("");
   const [input, setInput] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -11,18 +11,40 @@ const Gemini = () => {
     try {
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
+  
       const result = await model.generateContent(input);
       const text = result.response?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
-        
-      // Update chat history
-      setChatHistory([...chatHistory, { role: "user", text: input }, { role: "ai", text }]);
+  
+      // Add user's input to chat history
+      setChatHistory((prevChat) => [...prevChat, { role: "user", text: input }]);
       setInput(""); 
+  
+      // Initialize AI response with empty text
+      let displayedText = "";
+      setChatHistory((prevChat) => [...prevChat, { role: "ai", text: displayedText }]);
+  
+      // Simulate AI typing effect
+      let index = 0;
+      const typingInterval = setInterval(() => {
+        if (index < text.length) {
+          displayedText += text[index]; // Add one character at a time
+          setChatHistory((prevChat) => {
+            const updatedChat = [...prevChat];
+            updatedChat[updatedChat.length - 1] = { role: "ai", text: displayedText };
+            return updatedChat;
+          });
+          index++;
+        } else {
+          clearInterval(typingInterval); // Stop once done
+        }
+      }, 50); // Adjust delay for faster/slower typing effect
+  
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      setResponse("Error fetching response.");
+      setChatHistory((prevChat) => [...prevChat, { role: "ai", text: "Error fetching response." }]);
     }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -7,7 +7,6 @@ function App() {
 
   return (
     <>
-      <h1>Welcome Amigos</h1>
       <Gemini/>
     </>
   );
