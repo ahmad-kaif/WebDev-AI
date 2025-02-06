@@ -1,0 +1,106 @@
+/* Gemini Chat Container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header */
+  .chat-header {
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #333;
+    border-bottom: 1px solid #444;
+  }
+  
+  /* Chat Messages Box */
+  .chat-box {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* User & AI Messages */
+  .message {
+    display: flex;
+    max-width: 80%;
+  }
+  
+  .message.user {
+    align-self: flex-end;
+  }
+  
+  .message.ai {
+    align-self: flex-start;
+  }
+  
+  /* Message Bubble */
+  .message-bubble {
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .user .message-bubble {
+    background-color: #007aff;
+    color: white;
+    border-top-right-radius: 0;
+  }
+  
+  .ai .message-bubble {
+    background-color: #444;
+    color: white;
+    border-top-left-radius: 0;
+  }
+  
+  /* Chat Input Container */
+  .chat-input-container {
+    display: flex;
+    padding: 15px;
+    background-color: #333;
+    border-top: 1px solid #444;
+  }
+  
+  /* Input Field */
+  .chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #555;
+    color: white;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .chat-input::placeholder {
+    color: #bbb;
+  }
+  
+  /* Send Button */
+  .send-button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007aff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .send-button:hover {
+    background-color: #005ecb;
+  }
+  
